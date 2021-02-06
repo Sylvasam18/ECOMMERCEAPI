@@ -5,9 +5,10 @@
   "author": "Sylvasam18 <73111223+Sylvasam18@users.noreply.github.com>",
   "license": "MIT",
   "scripts": {
-    "start": "node index.js" 
+    "start": "node index.js"
   },
   "dependencies": {
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "mongoose": "^5.11.15"
   },
@@ -16,6 +17,7 @@
   },
 
   "engines": {
-    "node": "14.15.0"
+     "node": "14.15.0"
   }
+
 }

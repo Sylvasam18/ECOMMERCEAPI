@@ -10,42 +10,58 @@ app.get('/', (req, res) => {
     res.send('Welcome to Sylva Online Shop')
 })
 
-app.get('/products', async (req, res) => {
+app.get('/products', async (req, res, next) => {
+  try {
     const products = await Product.find()
     res.send(products)
+  } catch (error) {
+      next(error)
+  } 
 })
 
-app.post('/products', async (req, res) => {
+app.post('/products', async (req, res, next) => {
    try {
     const data = req.body
     const product = await Product.create(data)
 
     res.send(product)
    } catch (error) {
-       res.send(error.message)
+     next(error)
    }
 })
 
-app.get('/products/:id', async (req, res) => {
+app.get('/products/:id', async (req, res, next) => {
+   try {
     const {id} = req.params;
     const product = await Product.findOne({_id: id})
     res.send(product)
+   } catch (error) {
+       next(error)
+   }
 })
 
-app.patch('/products/:id', async (req, res) => {
-    const {id} = req.params;
+app.patch('/products/:id', async (req, res, next) => {
+    try {
+        const {id} = req.params;
     const data = req.body;
 
     const product = await Product.findOneAndUpdate({_id: id}, data, {new: true})
 
     res.send(product)
+    } catch (error) {
+        next(error)
+    }
 })
 
-app.delete('/products/:id', async (req, res) => {
-    const {id} = req.params;
+app.delete('/products/:id', async (req, res, next) => {
+    try {
+        const {id} = req.params;
     const product = await Product.findByIdAndDelete({_id: id})
 
     res.send(product)
+    } catch (error) {
+        next(error)
+    }
 })
 
 mongoose.connect('mongodb+srv://Sylvasam18:3RjOyf2b7Qe2IoZc@cluster0.pivgx.mongodb.net/introtomongo?retryWrites=true&w=majority', {
