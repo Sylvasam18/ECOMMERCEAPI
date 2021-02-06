@@ -2,6 +2,8 @@ const express = require('express')
 const mongoose = require('mongoose')
 const Product = require('./models/product')
 
+let port = process.env.PORT || 3000
+
 const app = express()
 
 app.use(express.json())
@@ -69,7 +71,7 @@ mongoose.connect('mongodb+srv://Sylvasam18:3RjOyf2b7Qe2IoZc@cluster0.pivgx.mongo
     useUnifiedTopology: true
 }).then(() => {
     console.log('DB conected')
-    app.listen('9000', () => {
+    app.listen(port, () => {
         console.log('server running')
         
     })
